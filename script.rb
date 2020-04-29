@@ -86,17 +86,7 @@ def find_fastest_capture
 
   position = came_from[position] while came_from[position] != @current_position
 
-  if position[:x] == @current_position[:x] && position[:y] > @current_position[:y]
-    'down'
-  elsif position[:x] == @current_position[:x] && position[:y] < @current_position[:y]
-    'up'
-  elsif position[:x] > @current_position[:x] && position[:y] == @current_position[:y]
-    'right'
-  elsif position[:x] < @current_position[:x] && position[:y] == @current_position[:y]
-    'left'
-  else
-    'idle'
-  end
+  move_to_position(position)
 end
 
 def find_most_offensive_move
@@ -137,17 +127,7 @@ def find_most_offensive_move
 
   puts "/ #{position}"
 
-  if position[:x] == @current_position[:x] && position[:y] > @current_position[:y]
-    'down'
-  elsif position[:x] == @current_position[:x] && position[:y] < @current_position[:y]
-    'up'
-  elsif position[:x] > @current_position[:x] && position[:y] == @current_position[:y]
-    'right'
-  elsif position[:x] < @current_position[:x] && position[:y] == @current_position[:y]
-    'left'
-  else
-    'idle'
-  end
+  move_to_position(position)
 end
 
 def get_neighbors(position)
@@ -171,8 +151,18 @@ def get_neighbors(position)
   neighbors.sort_by { |n| Digest::MD5.hexdigest(n.to_json) }
 end
 
-def move(direction)
-  File.open('act', 'w') { |file| file.write(direction) }
+def move_to_position(position)
+  if position[:x] == @current_position[:x] && position[:y] > @current_position[:y]
+    'down'
+  elsif position[:x] == @current_position[:x] && position[:y] < @current_position[:y]
+    'up'
+  elsif position[:x] > @current_position[:x] && position[:y] == @current_position[:y]
+    'right'
+  elsif position[:x] < @current_position[:x] && position[:y] == @current_position[:y]
+    'left'
+  else
+    'idle'
+  end
 end
 
 def print_map
@@ -222,7 +212,7 @@ loop do
 
   print_stats
 
-  move(next_move)
+  File.open('act', 'w') { |file| file.write(next_move) }
 
   system('git add -A')
   system("git commit -m \"Update #{Time.now}\"")
