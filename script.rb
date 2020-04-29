@@ -103,6 +103,8 @@ def find_most_offensive_move
   targets = %w[ub ug ur]
   targets.delete(targets.find { |t| t[1] == @team[1] })
   puts "/ #{@counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }}"
+  target = @counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }.first
+  puts "/ #{target}"
   'idle'
 end
 
