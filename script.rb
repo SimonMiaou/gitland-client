@@ -33,6 +33,12 @@ TEAM_TO_STRING = {
 }.freeze
 
 def find_best_move
+  next_move = 'idle'
+  next_move = find_fastest_capture if next_move == 'idle'
+  next_move
+end
+
+def find_fastest_capture
   frontier = [@current_position]
   came_from = {}
   targets = %w[ub ug ur ux]
