@@ -89,6 +89,7 @@ def find_fastest_capture
 end
 
 def find_most_offensive_move
+  puts '/ find_most_offensive_move'
   targets = %w[ub ug ur]
   targets.delete(targets.find { |t| t[1] == @team[1] })
   target = @counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }.first
@@ -102,6 +103,7 @@ def find_most_offensive_move
 
   until frontier.empty?
     position = frontier.shift
+    puts "/ #{position}"
 
     break if @map[position[:y]][position[:x]] == target
 
@@ -116,6 +118,8 @@ def find_most_offensive_move
   end
 
   return 'idle' if position.nil?
+
+  puts "// #{position}"
 
   position = came_from[position] while came_from[position] != @current_position
 
