@@ -139,7 +139,7 @@ def get_neighbors(position)
       n[:y] < min_y || n[:y] > max_y
   end
 
-  neighbors.sort_by { |n| -1 * @decay[n[:y]][n[:x]].to_i }
+  neighbors.sort_by { |n| -@decay[n[:y]][n[:x]].to_i }
 end
 
 def position_to_move(position)
