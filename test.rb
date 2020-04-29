@@ -86,14 +86,9 @@ end
 
 # CODE
 
-targets = %w[ub ug ur]
-targets.delete(targets.find { |t| t[1] == @team[1] })
-target = @counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }.first
-
 frontier = [@current_position]
 came_from = {}
 uncontrolled = %w[ub ug ur ux]
-uncontrolled.delete(uncontrolled.find { |t| t[1] == @team[1] })
 
 position = nil
 
