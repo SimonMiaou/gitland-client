@@ -33,7 +33,7 @@ TEAM_TO_STRING = {
 }.freeze
 
 def compute_counters
-    @counters = {
+  @counters = {
     'cb' => 0,
     'ub' => 0,
     'cg' => 0,
@@ -137,9 +137,7 @@ def print_map
 end
 
 def print_stats
-
-
-  counters.each do |k, v|
+  @counters.each do |k, v|
     next if v.zero?
 
     print "| #{CELL_TO_EMOJI[k]} #{v} "
@@ -158,9 +156,7 @@ loop do
   @current_position = { x: File.read("gitland/players/#{PLAYER_NAME}/x").to_i,
                         y: File.read("gitland/players/#{PLAYER_NAME}/y").to_i }
 
-
   compute_counters
-
 
   next_move = find_best_move
 
