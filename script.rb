@@ -144,6 +144,10 @@ def get_neighbors(position)
       n[:y] < min_y || n[:y] > max_y
   end
 
+  neighbors.sort_by { |n| @decay[n[:y]][n[:x]] }.each do |n|
+    puts "#{n[:x]}:#{n[:y]} #{@decay[n[:y]][n[:x]]}"
+  end
+
   neighbors.sort_by { |n| Digest::MD5.hexdigest(n.to_json) }
 end
 
@@ -190,6 +194,7 @@ loop do
   system('cd gitland && git pull')
 
   @map = CSV.parse(File.read('gitland/map'))
+  @decay = CSV.parse(File.read('gitland/decay'))
   @team = File.read("gitland/players/#{PLAYER_NAME}/team")
   @current_position = { x: File.read("gitland/players/#{PLAYER_NAME}/x").to_i,
                         y: File.read("gitland/players/#{PLAYER_NAME}/y").to_i }
