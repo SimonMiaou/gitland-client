@@ -100,11 +100,37 @@ def find_fastest_capture
 end
 
 def find_most_offensive_move
+  puts '/ find_most_offensive_move'
   targets = %w[ub ug ur]
   targets.delete(targets.find { |t| t[1] == @team[1] })
   puts "/ #{@counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }}"
   target = @counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }.first
   puts "/ #{target}"
+
+  frontier = [@current_position]
+  came_from = {}
+  uncontrolled = %w[ub ug ur ux]
+  uncontrolled.delete(uncontrolled.find { |t| t[1] == @team[1] })
+
+  position = nil
+
+  until frontier.empty?
+    position = frontier.shift
+
+    break if @map[position[:y]][position[:x]] == target
+
+    get_neighbors(position).each do |next_position|
+      next unless uncontrolled.include?(@map[next_position[:y]][next_position[:x]])
+
+      unless came_from.keys.include?(next_position)
+        frontier << next_position
+        came_from[next_position] = position
+      end
+    end
+  end
+
+  puts "/ #{position}"
+
   'idle'
 end
 
