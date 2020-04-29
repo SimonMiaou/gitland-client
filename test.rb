@@ -116,3 +116,7 @@ return 'idle' if position.nil?
 puts "// #{position}"
 
 puts came_from
+
+position = came_from[position] while came_from[position] != @current_position
+
+puts "// #{position}"
