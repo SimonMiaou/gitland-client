@@ -100,7 +100,9 @@ def find_fastest_capture
 end
 
 def find_most_offensive_move
-  puts "/ #{@counters.select{|k,v|  ['ub','ug'].include?(k)}.max_by { |_k, v| v }}"
+  targets = %w[ub ug ur]
+  targets.delete(targets.find { |t| t[1] == @team[1] })
+  puts "/ #{@counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }}"
   'idle'
 end
 
