@@ -96,6 +96,8 @@ def find_most_offensive_move
   target = @counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }.first
   puts "/ #{target}"
 
+  target = 'ux' # TODO: remove
+
   frontier = [@current_position]
   came_from = {}
   uncontrolled = %w[ub ug ur ux]
