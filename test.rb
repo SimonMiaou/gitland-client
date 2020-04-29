@@ -25,11 +25,35 @@ TEAM_TO_STRING = {
 
 system('rubocop -a')
 
+def get_neighbors(position)
+  min_x = 0
+  min_y = 0
+  max_x = @map.first.size - 1
+  max_y = @map.size - 1
+
+  neighbors = []
+
+  neighbors << { x: position[:x] + 1, y: position[:y] }
+  neighbors << { x: position[:x] - 1, y: position[:y] }
+  neighbors << { x: position[:x], y: position[:y] + 1 }
+  neighbors << { x: position[:x], y: position[:y] - 1 }
+
+  neighbors.reject! do |n|
+    n[:x] < min_x || n[:x] > max_x ||
+      n[:y] < min_y || n[:y] > max_y
+  end
+
+  neighbors.sort_by { |n| Digest::MD5.hexdigest(n.to_json) }
+end
+
+# FETCH DATA
+
 @map = CSV.parse(File.read('gitland/map'))
 @team = File.read("gitland/players/#{PLAYER_NAME}/team")
 @current_position = { x: File.read("gitland/players/#{PLAYER_NAME}/x").to_i,
                       y: File.read("gitland/players/#{PLAYER_NAME}/y").to_i }
 
+# MAP
 @map.each_with_index do |row, y|
   row.each_with_index do |cell, x|
     if x == @current_position[:x] && y == @current_position[:y]
@@ -40,6 +64,27 @@ system('rubocop -a')
   end
   print "\n"
 end
+
+# COUNTERS
+
+@counters = {
+  'cb' => 0,
+  'ub' => 0,
+  'cg' => 0,
+  'ug' => 0,
+  'cr' => 0,
+  'ur' => 0,
+  'ux' => 0
+}
+
+@map.each do |row|
+  row.each do |cell|
+    @counters[cell] ||= 0
+    @counters[cell] += 1
+  end
+end
+
+# CODE
 
 targets = %w[ub ug ur]
 targets.delete(targets.find { |t| t[1] == @team[1] })
