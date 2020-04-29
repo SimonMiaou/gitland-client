@@ -140,7 +140,7 @@ def get_neighbors(position)
       n[:y] < min_y || n[:y] > max_y
   end
 
-  neighbors.sort_by { |n| -@decay[n[:y]][n[:x]] }.each do |n|
+  neighbors.sort_by { |n| -1 * @decay[n[:y]][n[:x]].to_i }.each do |n|
     puts "#{n[:x]}:#{n[:y]} #{@decay[n[:y]][n[:x]]}"
   end
 
