@@ -10,7 +10,6 @@ PLAYER_NAME = 'SimonMiaou'
 #=====
 
 require 'csv'
-require 'digest'
 require 'json'
 require 'net/http'
 require 'uri'
@@ -140,11 +139,7 @@ def get_neighbors(position)
       n[:y] < min_y || n[:y] > max_y
   end
 
-  neighbors.sort_by { |n| -1 * @decay[n[:y]][n[:x]].to_i }.each do |n|
-    puts "#{n[:x]}:#{n[:y]} #{@decay[n[:y]][n[:x]]}"
-  end
-
-  neighbors.sort_by { |n| Digest::MD5.hexdigest(n.to_json) }
+  neighbors.sort_by { |n| -1 * @decay[n[:y]][n[:x]].to_i }
 end
 
 def position_to_move(position)
