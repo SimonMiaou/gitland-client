@@ -39,6 +39,7 @@ def find_best_move
 end
 
 def find_fastest_capture
+  puts '/ find_fastest_capture'
   frontier = [@current_position]
   came_from = {}
   targets = %w[ub ug ur ux]
