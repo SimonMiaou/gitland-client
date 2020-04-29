@@ -53,6 +53,7 @@ end
 
 def find_best_move
   next_move = 'idle'
+  next_move = find_most_offensive_move if next_move == 'idle'
   next_move = find_fastest_capture if next_move == 'idle'
   next_move
 end
@@ -96,6 +97,11 @@ def find_fastest_capture
   else
     'idle'
   end
+end
+
+def find_most_offensive_move
+  puts "/ #{@counters.max_by { |_k, v| v }}"
+  'idle'
 end
 
 def get_neighbors(position)
