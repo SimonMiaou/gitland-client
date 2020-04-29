@@ -131,7 +131,23 @@ def find_most_offensive_move
 
   puts "/ #{position}"
 
-  'idle'
+  return 'idle' if position.nil?
+
+  position = came_from[position] while came_from[position] != @current_position
+
+  puts "/ #{position}"
+
+  if position[:x] == @current_position[:x] && position[:y] > @current_position[:y]
+    'down'
+  elsif position[:x] == @current_position[:x] && position[:y] < @current_position[:y]
+    'up'
+  elsif position[:x] > @current_position[:x] && position[:y] == @current_position[:y]
+    'right'
+  elsif position[:x] < @current_position[:x] && position[:y] == @current_position[:y]
+    'left'
+  else
+    'idle'
+  end
 end
 
 def get_neighbors(position)
