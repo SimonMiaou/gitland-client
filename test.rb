@@ -1,3 +1,9 @@
+require 'csv'
+require 'digest'
+require 'json'
+require 'net/http'
+require 'uri'
+
 PLAYER_EMOJI = '😺'
 PLAYER_NAME = 'SimonMiaou'
 CELL_TO_EMOJI = {
@@ -82,6 +88,6 @@ return 'idle' if position.nil?
 
 puts "// #{position}"
 
-position = came_from[position] while came_from[position] != @current_position
+puts came_from
 
-position_to_move(position)
+
