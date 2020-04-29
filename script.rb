@@ -32,6 +32,25 @@ TEAM_TO_STRING = {
   'cr' => '🔴 Red'
 }.freeze
 
+def compute_counters
+    @counters = {
+    'cb' => 0,
+    'ub' => 0,
+    'cg' => 0,
+    'ug' => 0,
+    'cr' => 0,
+    'ur' => 0,
+    'ux' => 0
+  }
+
+  @map.each do |row|
+    row.each do |cell|
+      @counters[cell] ||= 0
+      @counters[cell] += 1
+    end
+  end
+end
+
 def find_best_move
   next_move = 'idle'
   next_move = find_fastest_capture if next_move == 'idle'
@@ -118,22 +137,7 @@ def print_map
 end
 
 def print_stats
-  counters = {
-    'cb' => 0,
-    'ub' => 0,
-    'cg' => 0,
-    'ug' => 0,
-    'cr' => 0,
-    'ur' => 0,
-    'ux' => 0
-  }
 
-  @map.each do |row|
-    row.each do |cell|
-      counters[cell] ||= 0
-      counters[cell] += 1
-    end
-  end
 
   counters.each do |k, v|
     next if v.zero?
@@ -153,6 +157,10 @@ loop do
   @team = File.read("gitland/players/#{PLAYER_NAME}/team")
   @current_position = { x: File.read("gitland/players/#{PLAYER_NAME}/x").to_i,
                         y: File.read("gitland/players/#{PLAYER_NAME}/y").to_i }
+
+
+  compute_counters
+
 
   next_move = find_best_move
 
