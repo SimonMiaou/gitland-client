@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-# CONFIG
-# ======
-
-PLAYER_EMOJI = '😺'
-PLAYER_NAME = 'SimonMiaou'
-
 # CODE
 #=====
 
@@ -15,6 +9,12 @@ require 'net/http'
 require 'uri'
 
 system('rubocop -a')
+
+# CONFIG
+# ======
+
+PLAYER_EMOJI = '😺'
+PLAYER_NAME = 'SimonMiaou'
 
 CELL_TO_EMOJI = {
   'cb' => '🔵',
