@@ -201,6 +201,7 @@ loop do
   puts "| Team:      #{TEAM_TO_STRING[@team]}"
   puts "| Position:  #{@current_position[:x]}, #{@current_position[:y]}"
   puts "| Next move: #{next_move}"
+  puts '=============================================='
   print_map
   puts '=============================================='
   print_stats
