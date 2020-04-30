@@ -197,9 +197,9 @@ loop do
   next_move = find_best_move
 
   puts '=============================================='
-  puts "| Player: #{PLAYER_NAME}"
-  puts "| Team: #{TEAM_TO_STRING[@team]}"
-  puts "| Position: #{@current_position[:x]}, #{@current_position[:y]}"
+  puts "| Player:    #{PLAYER_NAME}"
+  puts "| Team:      #{TEAM_TO_STRING[@team]}"
+  puts "| Position:  #{@current_position[:x]}, #{@current_position[:y]}"
   puts "| Next move: #{next_move}"
   print_map
   puts '=============================================='
