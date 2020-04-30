@@ -81,8 +81,9 @@ def find_fastest_capture
   end
 
   return 'idle' if position.nil?
+  return 'idle' if position == @current_position
 
-  position = came_from[position] while came_from[position] != @current_position && position != @current_position
+  position = came_from[position] while came_from[position] != @current_position
 
   position_to_move(position)
 end
@@ -115,8 +116,9 @@ def find_most_offensive_move
   end
 
   return 'idle' if position.nil?
+  return 'idle' if position == @current_position
 
-  position = came_from[position] while came_from[position] != @current_position && position != @current_position
+  position = came_from[position] while came_from[position] != @current_position
 
   position_to_move(position)
 end
