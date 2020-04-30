@@ -51,7 +51,6 @@ def compute_counters
 end
 
 def find_best_move
-  puts '// find_best_move'
   next_move = 'idle'
   next_move = find_most_offensive_move if next_move == 'idle'
   next_move = find_fastest_capture if next_move == 'idle'
@@ -59,7 +58,6 @@ def find_best_move
 end
 
 def find_fastest_capture
-  puts '// find_fastest_capture'
   frontier = [@current_position]
   came_from = {}
   targets = %w[ub ug ur ux]
@@ -84,13 +82,12 @@ def find_fastest_capture
 
   return 'idle' if position.nil?
 
-  position = came_from[position] while came_from[position] != @current_position
+  position = came_from[position] while came_from[position] != @current_position && position != @current_position
 
   position_to_move(position)
 end
 
 def find_most_offensive_move
-  puts '// find_most_offensive_move'
   targets = %w[ub ug ur]
   targets.delete(targets.find { |t| t[1] == @team[1] })
   target = @counters.select { |k, _v| targets.include?(k) }.max_by { |_k, v| v }.first
@@ -104,7 +101,6 @@ def find_most_offensive_move
 
   until frontier.empty?
     position = frontier.shift
-    puts "/// Checking #{position}"
 
     break if @map[position[:y]][position[:x]] == target
 
@@ -118,13 +114,9 @@ def find_most_offensive_move
     end
   end
 
-  puts "/// Found #{position}"
-
   return 'idle' if position.nil?
 
-  position = came_from[position] while came_from[position] != @current_position
-
-  puts "/// Moving to #{position}"
+  position = came_from[position] while came_from[position] != @current_position && position != @current_position
 
   position_to_move(position)
 end
