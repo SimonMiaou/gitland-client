@@ -201,13 +201,9 @@ loop do
   puts "| Team: #{TEAM_TO_STRING[@team]}"
   puts "| Position: #{@current_position[:x]}, #{@current_position[:y]}"
   puts "| Next move: #{next_move}"
-
   print_map
-
   puts '=============================================='
-
   print_stats
-
   puts '=============================================='
 
   File.open('act', 'w') { |file| file.write(next_move) }
