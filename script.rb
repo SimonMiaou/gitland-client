@@ -194,7 +194,6 @@ loop do
 
   compute_counters
 
-  print_map # TODO: DELETE
 
   next_move = find_best_move
 
