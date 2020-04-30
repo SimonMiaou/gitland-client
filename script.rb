@@ -104,7 +104,7 @@ def find_most_offensive_move
 
   until frontier.empty?
     position = frontier.shift
-puts "/// Checking #{position}"
+    puts "/// Checking #{position}"
 
     break if @map[position[:y]][position[:x]] == target
 
@@ -118,11 +118,13 @@ puts "/// Checking #{position}"
     end
   end
 
-puts "/// Found #{position}"
+  puts "/// Found #{position}"
 
   return 'idle' if position.nil?
 
   position = came_from[position] while came_from[position] != @current_position
+
+  puts "/// Moving to #{position}"
 
   position_to_move(position)
 end
@@ -200,8 +202,7 @@ loop do
 
   compute_counters
 
-  print_map # TODO DELETE
-
+  print_map # TODO: DELETE
 
   next_move = find_best_move
 
