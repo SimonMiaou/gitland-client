@@ -104,6 +104,7 @@ def find_most_offensive_move
 
   until frontier.empty?
     position = frontier.shift
+puts "/// Checking #{position}"
 
     break if @map[position[:y]][position[:x]] == target
 
@@ -116,6 +117,8 @@ def find_most_offensive_move
       end
     end
   end
+
+puts "/// Found #{position}"
 
   return 'idle' if position.nil?
 
@@ -196,6 +199,9 @@ loop do
                         y: File.read("gitland/players/#{PLAYER_NAME}/y").to_i }
 
   compute_counters
+
+  print_map # TODO DELETE
+
 
   next_move = find_best_move
 
