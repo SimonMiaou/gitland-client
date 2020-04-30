@@ -141,7 +141,13 @@ def get_neighbors(position)
       n[:y] < min_y || n[:y] > max_y
   end
 
-  neighbors.sort_by { |n| -@decay[n[:y]][n[:x]].to_i }
+  neighbors.sort_by do |n|
+    if @map[n[:y]][n[:x]] == @team
+      @decay[n[:y]][n[:x]].to_i
+    else
+      -@decay[n[:y]][n[:x]].to_i
+      end
+  end
 end
 
 def position_to_move(position)
