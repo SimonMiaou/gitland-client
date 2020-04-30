@@ -204,7 +204,11 @@ loop do
 
   print_map
 
+  puts '===================='
+
   print_stats
+
+  puts '===================='
 
   File.open('act', 'w') { |file| file.write(next_move) }
 
