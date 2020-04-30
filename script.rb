@@ -141,9 +141,10 @@ def get_neighbors(position)
       n[:y] < min_y || n[:y] > max_y
   end
 
-  # First priority: enemies' cells with high decay first
-  # Second priority: empty cells
-  # Third priority: our cells with low decay first
+  # Ordering:
+  # * enemies' cells with high decay first
+  # * empty cells
+  # * our cells with low decay first
   neighbors.sort_by do |n|
     if @map[n[:y]][n[:x]] == @team
       @decay[n[:y]][n[:x]].to_i
