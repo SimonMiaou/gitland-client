@@ -196,7 +196,7 @@ loop do
 
   next_move = find_best_move
 
-  puts '| ========================================'
+  puts '=============================================='
   puts "| Player: #{PLAYER_NAME}"
   puts "| Team: #{TEAM_TO_STRING[@team]}"
   puts "| Position: #{@current_position[:x]}, #{@current_position[:y]}"
@@ -204,11 +204,11 @@ loop do
 
   print_map
 
-  puts '| ========================================'
+  puts '=============================================='
 
   print_stats
 
-  puts '| ========================================'
+  puts '=============================================='
 
   File.open('act', 'w') { |file| file.write(next_move) }
 
