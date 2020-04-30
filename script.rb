@@ -142,7 +142,13 @@ def get_neighbors(position)
   end
 
   neighbors.sort_by do |n|
-    @map[n[:y]][n[:x]] == @team ? @decay[n[:y]][n[:x]].to_i : -@decay[n[:y]][n[:x]].to_i
+    if @map[n[:y]][n[:x]] == @team
+      @decay[n[:y]][n[:x]].to_i
+    elsif @map[n[:y]][n[:x]] == 'ux'
+      0
+    else
+      -@decay[n[:y]][n[:x]].to_i
+    end
   end
 end
 
