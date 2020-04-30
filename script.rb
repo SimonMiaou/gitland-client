@@ -182,10 +182,8 @@ end
 # =========
 
 loop do
-  puts '// cd gitland && git pull'
   system('cd gitland && git pull')
 
-  puts '// read data'
   @map = CSV.parse(File.read('gitland/map'))
   @decay = CSV.parse(File.read('gitland/decay'))
   @team = File.read("gitland/players/#{PLAYER_NAME}/team")
@@ -194,10 +192,7 @@ loop do
 
   compute_counters
 
-
   next_move = find_best_move
-
-  puts '// print'
 
   puts '===================='
   puts "| Player: #{PLAYER_NAME}"
