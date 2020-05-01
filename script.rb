@@ -196,6 +196,7 @@ end
 # =========
 
 loop do
+  system('clear')
   system('cd gitland && git pull')
 
   @map = CSV.parse(File.read('gitland/map'))
