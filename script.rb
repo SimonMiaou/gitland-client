@@ -26,9 +26,9 @@ CELL_TO_EMOJI = {
   'ux' => '⬛️'
 }.freeze
 TEAM_TO_STRING = {
-  'cb' => '🔵 Blue',
-  'cg' => '🟢 Green',
-  'cr' => '🔴 Red'
+  'cb' => '🔵',
+  'cg' => '🟢',
+  'cr' => '🔴'
 }.freeze
 
 def compute_counters
@@ -192,6 +192,32 @@ def print_stats
   print "|\n"
 end
 
+def print_players
+  players = Dir.entries('gitland/players')
+               .reject { |player| ['.', '..'].include?(player) }
+               .select { |player| File.directory?("gitland/players/#{player}") }
+               .sort
+
+  players.each do |player|
+    team = File.read("gitland/players/#{player}/team")
+    x = File.read("gitland/players/#{player}/x")
+    y = File.read("gitland/players/#{player}/y")
+    timestamp = File.read("gitland/players/#{player}/timestamp").to_i
+    print "| #{TEAM_TO_STRING[team]} #{player} (#{x}, #{y}) #{time_ago(timestamp)} "
+  end
+  puts "|\n"
+end
+
+def time_ago(timestamp)
+  delta = Time.now.to_i - timestamp
+  case delta
+  when 0..30         then 'just now'
+  when 31..119       then 'about a minute ago'
+  when 120..3599     then "#{delta / 60} minutes ago"
+  else "#{(delta / 3600).round} hours ago"
+  end
+end
+
 # MAIN LOOP
 # =========
 
@@ -217,6 +243,8 @@ loop do
   print_map
   puts '=============================================='
   print_stats
+  puts '=============================================='
+  print_players
   puts '=============================================='
 
   File.open('act', 'w') { |file| file.write(next_move) }
