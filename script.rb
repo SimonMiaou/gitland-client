@@ -172,6 +172,7 @@ end
 
 def print_map
   @map.each_with_index do |row, y|
+    print '| '
     row.each_with_index do |cell, x|
       if x == @current_position[:x] && y == @current_position[:y]
         print PLAYER_EMOJI
@@ -233,18 +234,18 @@ loop do
 
   next_move = find_best_move
 
-  puts '=============================================='
+  puts '================================================'
   puts "| Player:    #{PLAYER_NAME}"
   puts "| Team:      #{TEAM_TO_STRING[@team]}"
   puts "| Position:  #{@current_position[:x]}, #{@current_position[:y]}"
   puts "| Next move: #{next_move}"
-  puts '=============================================='
+  puts '================================================'
   print_map
-  puts '=============================================='
+  puts '================================================'
   print_stats
-  puts '=============================================='
+  puts '================================================'
   # print_players
-  # puts '=============================================='
+  # puts '================================================'
 
   File.open('act', 'w') { |file| file.write(next_move) }
 
