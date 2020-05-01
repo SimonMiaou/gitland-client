@@ -129,11 +129,6 @@ def get_neighbors(position)
   max_x = @map.first.size - 1
   max_y = @map.size - 1
 
-  min_x += 2
-  min_y += 2
-  max_x -= 2
-  max_y -= 2
-
   neighbors = []
 
   neighbors << { x: position[:x] + 1, y: position[:y] }
