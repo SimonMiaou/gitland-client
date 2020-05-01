@@ -203,9 +203,9 @@ def print_players
     x = File.read("gitland/players/#{player}/x")
     y = File.read("gitland/players/#{player}/y")
     timestamp = File.read("gitland/players/#{player}/timestamp").to_i
-    print "| #{TEAM_TO_STRING[team]} #{player} (#{x}, #{y}) #{time_ago(timestamp)} "
+    print " #{TEAM_TO_STRING[team]} #{player} (#{x}, #{y}) #{time_ago(timestamp)} "
   end
-  puts "|\n"
+  puts "\n"
 end
 
 def time_ago(timestamp)
