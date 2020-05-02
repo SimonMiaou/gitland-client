@@ -228,9 +228,7 @@ end
 # =========
 
 loop do
-  puts "### #{Time.now.strftime('%k:%M:%S')} Pulling latest gitland changes"
   system('cd gitland && git pull')
-  puts "### #{Time.now.strftime('%k:%M:%S')} Pulled latest gitland changes"
 
   @map = CSV.parse(File.read('gitland/map'))
   @decay = CSV.parse(File.read('gitland/decay'))
@@ -255,13 +253,11 @@ loop do
   # print_players
   # puts '=================================================='
 
-  puts "### #{Time.now.strftime('%k:%M:%S')} Pushing new act file"
   File.open('act', 'w') { |file| file.write(next_move) }
 
   system('git add -A')
   system("git commit -m \"Update #{Time.now}\"")
   system('git push')
 
-  puts "### #{Time.now.strftime('%k:%M:%S')} Sleep for 30s"
   sleep 30
 end
