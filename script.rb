@@ -222,6 +222,7 @@ end
 # =========
 
 loop do
+  puts "### #{Time.now.strftime("%k:%M")} Pulling latest gitland changes"
   system('cd gitland && git pull')
 
   @map = CSV.parse(File.read('gitland/map'))
