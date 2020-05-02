@@ -246,8 +246,8 @@ loop do
   puts '=================================================='
   print_stats
   puts '=================================================='
-  # print_players
-  # puts '=================================================='
+  print_players
+  puts '=================================================='
 
   puts "### #{Time.now.strftime('%k:%M:%S')} Pushing new act file"
   File.open('act', 'w') { |file| file.write(next_move) }
