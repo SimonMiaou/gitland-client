@@ -130,10 +130,10 @@ def get_neighbors(position)
   max_y = @map.size - 1
 
   # Avoid borders
-  min_x = [min_x + 1, @current_position[:x]].min
-  min_y = [min_y + 1, @current_position[:y]].min
-  max_x = [max_x - 1, @current_position[:x]].max
-  max_y = [max_y - 1, @current_position[:y]].max
+  # min_x = [min_x + 1, @current_position[:x]].min
+  # min_y = [min_y + 1, @current_position[:y]].min
+  # max_x = [max_x - 1, @current_position[:x]].max
+  # max_y = [max_y - 1, @current_position[:y]].max
 
   neighbors = []
 
